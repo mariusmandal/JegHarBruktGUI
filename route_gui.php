@@ -9,6 +9,9 @@ $app->get('/', function() use($JHBapp, $app) {
 });
 
 $app->get('/register/', function() use($JHBapp, $app) {
+
+	$JHBapp->categories = $JHBapp->request('GET','categories',true);
+
 	return $app['twig']->render('register.twig.html', (array) $JHBapp );
 });
 

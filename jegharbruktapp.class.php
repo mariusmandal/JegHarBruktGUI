@@ -56,6 +56,7 @@ class JHBapp {
 			if( $app['session']->get('JHB_u_id') !== '' && '' != $app['session']->get('JHB_hash') ) {
 				if( $this->_restore_session() ) {
 					$this->is_logged_in = true;
+					$this->_api_authorize();
 					return true;
 				}
 			} else {
@@ -142,7 +143,7 @@ class JHBapp {
 		}
 		
 		try {
-			$this->JHBapi->authorize( $USER, $this->user->token );
+			$this->JHBapi->authorize( $USER, true );
 		} catch( Exception $e ) {
 			return $this->_api_die( $e );
 		}

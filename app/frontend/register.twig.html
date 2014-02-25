@@ -14,16 +14,16 @@
 			<div class="row">
 				<select name="category" class="input-large" id="jhb_used_category" tabindex="2">
 					<option disabled="disabled" selected="selected">Velg kategori</option>
-					{% if categories_user|length > 0 %}
+					{% if categories.user|length > 0 %}
 						<optgroup label="Dine kategorier">
-							{% for category in categories_user%}
+							{% for category in categories.user%}
 								<option value="{{category.id}}" id="c_{{category.id}}" selected="selected">{{category.title|capitalize}}</option>
 							{% endfor %}
 						</optgroup>
 					{% endif %}
-					{% if categories_system|length > 0 %}
+					{% if categories.system|length > 0 %}
 						<optgroup label="Standardkategorier">
-							{% for category in categories_system %}
+							{% for category in categories.system %}
 								<option value="{{category.id}}" id="c_{{category.id}}" selected="selected">{{category.title|capitalize}}</option>
 							{% endfor %}
 						</optgroup>
