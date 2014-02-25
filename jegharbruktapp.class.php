@@ -1,9 +1,35 @@
 <?php
 
+class mMenu {
+	public $top;
+	public $submenu;
+	public $base = '/JegHarBruktGUI';
+	
+	public function __construct() {}
+	
+	public function register($link, $title, $order=100) {
+		$this->top[ $order ] = (object) array('link' => $link,
+											   'title' => $title,
+											   'active' => false
+											  );
+	}
+	
+	public function active( $link ) {
+		foreach( $this->top as $order => $menu ) {
+			if( $menu->link == $link ) {
+				$menu->active = true;
+				$this->top[ $order ] = $menu;
+				break;
+			}
+		}
+	}
+}
+
 class JHBapp {
 	public $title = 'JegHarBrukt.no';
 	private $tested_login = false;
 	private $is_logged_in = false;
+	public $menu;
 	
 	public function __construct() {
 		$this->assets = new stdClass();
@@ -11,12 +37,18 @@ class JHBapp {
 		$this->assets->img = '/JegHarBruktGUI/web/img/';
 		$this->assets->js = '/JegHarBruktGUI/web/js/';
 		
+		$this->menu = new mMenu();
 		
-		$this->_authorize();
+		$this->api = new stdClass();
+		$this->api->key = 'test';
+		$this->api->secret = 'test';
+		
+		$this->unit = 1;
+		
+		$this->_api_init();
 	}
 
 	public function is_logged_in() {
-		$this->_api_init();
 		if( ! $this->tested_login ) {
 			$this->tested_login = true;
 
@@ -36,14 +68,13 @@ class JHBapp {
 	}
 
 	public function login( $username, $password ) {
-		$this->_api_init();
+		$this->user = new user();
 
-		$this->current_user = new user();
-
-		$authentication = $this->current_user->login( $username, $password );
+		$authentication = $this->user->login( $username, $password );
 		global $app;
-		$app['session']->set('JHB_u_id', $this->current_user->ID);
+		$app['session']->set('JHB_u_id', $this->user->ID);
 		$app['session']->set('JHB_hash', $authentication);
+		$this->_api_authorize();
 	}
 	
 	public function logout() {
@@ -54,31 +85,15 @@ class JHBapp {
 		$app['session']->remove('JHB_hash');
 	}
 	
-	private function _restore_session() {
-		global $app;
-		$this->current_user = new user();
-		try {
-			return $this->current_user->restore_session( $app['session']->get('JHB_u_id'), $app['session']->get('JHB_hash') );
-		} catch( Exception $e ) {
-			return false;
+	public function public_request( $action, $data ) {
+		if(!isset($this->JHBapi)) {
+			$this->_api_initiate();
+			$this->JHBapi->register_modules();
 		}
+		return $this->JHBapi->PUBLIC_GET( $action, $data );
 	}
-	
-	private function _authorize() {
-		$this->api = new stdClass();
-		$this->api->key = 'test';
-		$this->api->secret = 'test';
 		
-		$this->unit = 1;
-		
-		$this->user = new stdClass();
-		$this->user->ID = 1;
-		$this->user->token = 'system';
-
-	}
-	
 	public function request( $method, $action, $data ) {
-		$this->_api_init();
 		$this->request = new stdClass();
 		$this->request->method = $method;
 		$this->request->object = $action;
@@ -88,15 +103,14 @@ class JHBapp {
 	}
 	
 	private function _api_init() {
-		require_once(API_PATH.'user.class.php');
-
+		$this->_api_initiate();
 		$this->_api_authenticate();
-		$this->_api_authorize();
+#		$this->_api_authorize();
 		$this->JHBapi->register_modules();
 	}
 	
-	private function _api_authenticate() {
-		/// JHB API
+	private function _api_initiate() {
+		// JHB API
 		require_once('config.php');
 		require_once(API_PATH.'vendor/autoload.php');
 		// 
@@ -105,12 +119,14 @@ class JHBapp {
 		// CREATE MAIN APP INSTANCE AND AUTHENTICATE
 		require_once(API_PATH.'jegharbrukt.class.php');
 		$this->JHBapi = new JHB();
+	}
+	
+	private function _api_authenticate() {
 		try {
 			$this->JHBapi->authenticate( $this->api->key, $this->api->secret );
 		} catch( Exception $e ) {
 			return $this->_api_die( $e );
 		}
-		
 		try {
 			$this->JHBapi->setUnit( $this->unit );
 		} catch( Exception $e ) {
@@ -145,5 +161,16 @@ class JHBapp {
 		}
 		
 		return $error;
+	}
+	
+	private function _restore_session() {
+		global $app;
+		$this->user = new user();
+		try {
+			$result = $this->user->restore_session( $app['session']->get('JHB_u_id'), $app['session']->get('JHB_hash') );
+			return $result;
+		} catch( Exception $e ) {
+			return false;
+		}
 	}
 }

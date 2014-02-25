@@ -1,0 +1,51 @@
+{% extends "layout_sidebar.twig.html" %}
+
+{% block content %}
+<section id="main" role="main">
+	<div align="center" id="brukt">
+		<h1 class="hero">{% block pagetitle %}Jeg har brukt..{% endblock %}</h1>
+		<form method="post">
+			<div class="row">
+			  <input name="amount" class="input-large" id="jhb_used_amount" type="number" tabindex="1" placeholder="kr. ">
+			</div>
+			<div class="row">
+				<p>på</p>
+			</div>
+			<div class="row">
+				<select name="category" class="input-large" id="jhb_used_category" tabindex="2">
+					<option disabled="disabled" selected="selected">Velg kategori</option>
+					{% if categories_user|length > 0 %}
+						<optgroup label="Dine kategorier">
+							{% for category in categories_user%}
+								<option value="{{category.id}}" id="c_{{category.id}}" selected="selected">{{category.title|capitalize}}</option>
+							{% endfor %}
+						</optgroup>
+					{% endif %}
+					{% if categories_system|length > 0 %}
+						<optgroup label="Standardkategorier">
+							{% for category in categories_system %}
+								<option value="{{category.id}}" id="c_{{category.id}}" selected="selected">{{category.title|capitalize}}</option>
+							{% endfor %}
+						</optgroup>
+					{% endif %}
+
+					<optgroup label="eller">
+						<option value="new" id="c_create">Opprett ny kategori</option>
+					</optgroup>
+				</select>
+			</div>
+			<div class="row" style="display:none;">
+				<input name="category_new" class="input-large" tabindex="3" id="jhb_used_new_cat" type="text" placeholder="Skriv navn på ny kategori her" />
+			</div>
+			<div class="row">
+				<p>Eventuell beskrivelse:</p>
+			</div>	
+			<div class="row">
+				<input name="description" class="input-large" id="jhb_used_comment" type="text" tabindex="4" placeholder="For din egen husk.. :)"/>
+			</div>
+		
+			<button class="btn btn-large btn-danger" id="jhb-done" tabindex="5">OK</button>
+		</form>
+	</div>
+</section>
+{% endblock %}

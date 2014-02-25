@@ -17,7 +17,13 @@ $app['debug'] = APP_DEBUG;
 
 
 $JHBapp = new JHBapp();
-$JHBapp->is_logged_in();
+$logon = $JHBapp->is_logged_in();
+
+if( $logon ) {
+	$JHBapp->menu->register('/', 'Hjem', 10);
+	$JHBapp->menu->register('/consumption/', 'Forbruk', 20);
+	$JHBapp->menu->register('/register/', 'Registrer', 30);
+}
 
 // REGISTER ERROR HANDLER
 $app->error(function (\Exception $e, $code) use ($JHBapp, $app) {

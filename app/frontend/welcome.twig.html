@@ -1,20 +1,16 @@
-{% extends "layout_fullpage.twig.html" %}
+{% extends "layout_sidebar.twig.html" %}
 
 {% block content %}
-	<div id="homepage_image" style="background-image: url('http://mindofthegeek.com/wp-content/uploads/2012/03/piggybank.jpg');">
-		
-		<div class="container">
-			<div class="jumbotron col-xs-12 col-md-6" id="homepage_tron">
-				<div id="homepage_tron_content">
-					<h1>Snarveien til mer penger</h1>
-					<p>
-						Du er nå logget inn!
-					</p>
-					
-					<p>
-						<a class="btn btn-primary" href="action/logout/">Logg ut</a>
-					</p>
-			</div>
+	<div class="jumbotron col-xs-12 col-md-6" id="homepage_tron">
+		<div id="homepage_tron_content">
+			<h1>Snarveien til mer penger</h1>
+			<p>
+				Du er nå logget inn!
+			</p>
+			
+			<p>
+				<a class="btn btn-primary" href="action/logout/">Logg ut</a>
+			</p>
 		</div>
 	</div>
 {% endblock %}
