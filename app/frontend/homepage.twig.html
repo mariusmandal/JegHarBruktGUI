@@ -19,10 +19,10 @@
 					</div>
 				</div>
 				<div id="homepage_form_logon" style="display:none;">
-					{% embed "form_logon.twig.html" %}{% endembed %}
+					{% embed "form_logon.twig.html" with { 'cancel':true } %}{% endembed %}
 				</div>
 				<div id="homepage_form_signup" style="display:none;">
-					{% embed "form_signup.twig.html" %}{% endembed %}
+					{% embed "form_signup.twig.html" with { 'cancel':true } %}{% endembed %}
 				</div>
 
 			</div>

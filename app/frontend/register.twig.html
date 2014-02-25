@@ -6,25 +6,25 @@
 		<h1 class="hero">{% block pagetitle %}Jeg har brukt..{% endblock %}</h1>
 		<form method="post">
 			<div class="row">
-			  <input name="amount" class="input-large" id="jhb_used_amount" type="number" tabindex="1" placeholder="kr. ">
+			  <input name="amount" class="input-lg" id="jhb_used_amount" type="number" tabindex="1" placeholder="kr. ">
 			</div>
 			<div class="row">
 				<p>på</p>
 			</div>
 			<div class="row">
-				<select name="category" class="input-large" id="jhb_used_category" tabindex="2">
+				<select name="category" class="input-lg" id="jhb_used_category" tabindex="2">
 					<option disabled="disabled" selected="selected">Velg kategori</option>
 					{% if categories.user|length > 0 %}
 						<optgroup label="Dine kategorier">
 							{% for category in categories.user%}
-								<option value="{{category.id}}" id="c_{{category.id}}" selected="selected">{{category.title|capitalize}}</option>
+								<option value="{{category.id}}" id="c_{{category.id}}">{{category.title|capitalize}}</option>
 							{% endfor %}
 						</optgroup>
 					{% endif %}
 					{% if categories.system|length > 0 %}
 						<optgroup label="Standardkategorier">
 							{% for category in categories.system %}
-								<option value="{{category.id}}" id="c_{{category.id}}" selected="selected">{{category.title|capitalize}}</option>
+								<option value="{{category.id}}" id="c_{{category.id}}">{{category.title|capitalize}}</option>
 							{% endfor %}
 						</optgroup>
 					{% endif %}
@@ -35,16 +35,16 @@
 				</select>
 			</div>
 			<div class="row" style="display:none;">
-				<input name="category_new" class="input-large" tabindex="3" id="jhb_used_new_cat" type="text" placeholder="Skriv navn på ny kategori her" />
+				<input name="category_new" class="input-lg" tabindex="3" id="jhb_used_new_cat" type="text" placeholder="Skriv navn på ny kategori her" />
 			</div>
 			<div class="row">
 				<p>Eventuell beskrivelse:</p>
 			</div>	
 			<div class="row">
-				<input name="description" class="input-large" id="jhb_used_comment" type="text" tabindex="4" placeholder="For din egen husk.. :)"/>
+				<input name="description" class="input-lg" id="jhb_used_comment" type="text" tabindex="4" placeholder="For din egen husk.. :)"/>
 			</div>
 		
-			<button class="btn btn-large btn-danger" id="jhb-done" tabindex="5">OK</button>
+			<button class="btn btn-lg btn-danger" id="jhb-done" tabindex="5">OK</button>
 		</form>
 	</div>
 </section>

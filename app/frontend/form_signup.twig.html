@@ -26,5 +26,5 @@
 	</div>
 	
 	<button type="submit" class="btn btn-default">Registrer</button> 
-	<small><a id="homepage_signup_cancel">avbryt</a></small>
+	{% if cancel is defined and cancel %}<small><a id="homepage_signup_cancel">avbryt</a></small>{% endif %}
 </form>
