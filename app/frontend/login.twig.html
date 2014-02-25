@@ -1,0 +1,14 @@
+{% extends "layout_fullpage.twig.html" %}
+
+{% block content %}
+	<div class="container">
+		{% for message in app.session.getFlashBag.get('message') %}
+		<div class="alert alert-danger">
+			{{ message }}
+		</div>
+		{% endfor %}
+		<div id="homepage_form_logon">
+			{% embed "form_logon.twig.html" %}{% endembed %}
+		</div>
+	</div>
+{% endblock %}

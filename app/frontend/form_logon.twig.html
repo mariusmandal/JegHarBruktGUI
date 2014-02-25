@@ -1,0 +1,17 @@
+<h1>Logg inn</h1>
+<div class="pull-right fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false">Logg inn med facebook</div>
+<div class="clearfix"></div>
+<form action="/JegHarBruktGUI/action/login/" method="POST">
+	<div class="form-group">
+		<label for="homepage_logon_username">Brukernavn / e-postadresse</label>
+		<input class="form-control" type="text" name="username" id="homepage_logon_username" required autofocus />
+	</div>	
+	
+	<div class="form-group">
+		<label for="homepage_logon_password">Passord</label>
+		<input class="form-control" type="password" name="password" id="homepage_logon_password" required />
+	</div>
+	
+	<button type="submit" class="btn btn-default">Logg inn</button> 
+	<small><a id="homepage_logon_cancel">avbryt</a></small>
+</form>

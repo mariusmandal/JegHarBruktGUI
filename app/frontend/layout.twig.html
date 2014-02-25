@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{{title}}</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		
+
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+		<link href="{{ assets.css }}jhb.less" rel="stylesheet/less">
+		<link href="{{ assets.css }}offcanvas.css" rel="stylesheet">
+		<link href="{{ assets.css }}social-buttons-3.css" rel="stylesheet">
+
+		<script src="//www.google.com/jsapi"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		
+		<script src="{{assets.js}}jquery.verimail.js"></script>
+		<script src="{{assets.js}}less.min.js"></script>
+		<script src="{{assets.js}}jhb.js"></script>
+
+		<link rel="shortcut icon" href="{{ assets.img }}favicon.ico">
+		
+		<script>
+/*
+		(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/nb_NO/all.js#xfbml=1&appId=141746849361033";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+*/
+		</script>
+		<script language="javascript" type="text/javascript">
+			JHB_AJAX = '/JegHarBruktGUI/ajax/';
+		</script>
+	</head>
+	<div id="fb-root"></div>
+	<body ng-app="validationApp" ng-controller="mainController">
+		<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+<!--
+					<button type="button" class="pull-left navbar-toggle" data-toggle="offcanvas">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+-->
+					<a class="navbar-brand" href="#">JegHarBrukt</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+<!--
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="#contact">Contact</a></li>
+-->
+					</ul>
+				</div>
+				<!-- /.nav-collapse -->
+			</div>
+			<!-- /.container -->
+		</div>
+		<!-- /.navbar -->
+		{% block template %}{% endblock %}
+		<div class="clearfix"></div>x
+		<div class="container" id="content_body">
+			<footer>
+				<p class="pull-right">
+					<a href="#">Til toppen</a>
+				</p>
+				<p>
+					&copy; MariusMandal 2014
+					&middot;
+					<a href="priser/">Priser</a>
+				</p>
+			</footer>
+		</div>
+		<!--/.container-->
+	</body>
+</html>
